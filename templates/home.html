@@ -56,10 +56,20 @@
 <div class="container">
   <form method="post">
       <label>To Convert </label>
-      <input type="text" id="to_convert" name="to_convert" value="{{ to_convert }}">
-      <input type="submit" value="Ok">
-      <label>Morse Code</label>
-      <input type="text" value="{{ converted_string }}" disabled readonly>
+      <div>
+          <textarea class="form-control" placeholder="{{ to_convert }}" id="to_convert" rows="3"
+                    name="to_convert"></textarea>
+          <div>
+              <br>
+          <input class="form-control" type="submit" value="Ok">
+              <br>
+          </div>
+      </div>
+      <div>
+          <label>Morse Code</label>
+          <textarea class="form-control" id="textarea-morse" placeholder="{{ converted_string }}" rows="3" disabled
+                    readonly></textarea>
+      </div>
   </form>
 </div>
 <!--Footer-->

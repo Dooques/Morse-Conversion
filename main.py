@@ -15,12 +15,12 @@ morse = Morse()
 
 @app.route('/', methods=['get', 'post'])
 def home():
+    to_convert = "Type some text into the box and convert it to Morse Code!"
     if request.method == 'POST':
         to_convert = request.form['to_convert']
         converted_string = morse.convert_string(to_convert)
-        print(converted_string)
         return render_template('home.html', converted_string=converted_string, to_convert=to_convert)
-    return render_template('home.html', to_convert=" ")
+    return render_template('home.html', to_convert=to_convert)
 
 
 if __name__ == "__main__":
