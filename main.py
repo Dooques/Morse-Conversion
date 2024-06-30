@@ -14,14 +14,12 @@ with open('files/morse.csv', newline='') as csv_file:
         morse_code.append(entry[1])
 
 morse_alphabet = pd.DataFrame({'alphabet': alphabet, 'morse_code': morse_code})
-print(morse_alphabet)
 
 unconverted = []
 morse_string = []
-
 for char in to_convert:
-    if char in morse_alphabet.index:
-        morse_string.append(morse_alphabet.columns[char])
+    char_entry = morse_alphabet.loc[morse_alphabet.alphabet == char.capitalize()]
+    morse_string.append(char.capitalize() + ': ' + char_entry.morse_code.values[0])
 
 print(f'Your converted phrase is: {morse_string}')
 
