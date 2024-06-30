@@ -1,25 +1,20 @@
 import pandas as pd
 import csv
+from flask import Flask, abort, render_template, redirect, url_for, flash, request
+from flask_bootstrap import Bootstrap5
+from wtforms import form
+import os
 
-print('Welcome to the Morse Converter')
-to_convert = input("Please enter a word or phrase you wish to convert: ")
-alphabet = []
-morse_code = []
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+Bootstrap5(app)
 
-with open('files/morse.csv', newline='') as csv_file:
-    morse = csv.reader(csv_file, delimiter=' ', quotechar='|')
-    for row in morse:
-        entry = ', '.join(row).split(',')
-        alphabet.append(entry[0])
-        morse_code.append(entry[1])
 
-morse_alphabet = pd.DataFrame({'alphabet': alphabet, 'morse_code': morse_code})
+@app.route('/')
+def home():
+    return render_template('home.html')
 
-unconverted = []
-morse_string = []
-for char in to_convert:
-    char_entry = morse_alphabet.loc[morse_alphabet.alphabet == char.capitalize()]
-    morse_string.append(char.capitalize() + ': ' + char_entry.morse_code.values[0])
 
-print(f'Your converted phrase is: {morse_string}')
+if __name__ == "__main__":
+    app.run(debug=True)
 
