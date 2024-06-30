@@ -2,16 +2,19 @@ import pandas as pd
 import csv
 
 print('Welcome to the Morse Converter')
-to_convert = input("Please enter a word or phrase you wish to convert: ")
+# to_convert = input("Please enter a word or phrase you wish to convert: ")
+to_convert = "hello"
+alphabet = []
+morse_code = []
 with open('files/morse.csv', newline='') as csv_file:
     morse = csv.reader(csv_file, delimiter=' ', quotechar='|')
     for row in morse:
-        print(', '.join(row))
-
-print(morse)
-
+        entry = ', '.join(row).split(',')
+        alphabet.append(entry[0])
+        morse_code.append(entry[1])
+print(alphabet)
+print(morse_code)
 morse_alphabet = pd.DataFrame(morse, columns=['alphabet', 'morse'])
-print(morse_alphabet)
 
 unconverted = []
 morse_string = []
