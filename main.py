@@ -2,10 +2,10 @@ import pandas as pd
 import csv
 
 print('Welcome to the Morse Converter')
-# to_convert = input("Please enter a word or phrase you wish to convert: ")
-to_convert = "hello"
+to_convert = input("Please enter a word or phrase you wish to convert: ")
 alphabet = []
 morse_code = []
+
 with open('files/morse.csv', newline='') as csv_file:
     morse = csv.reader(csv_file, delimiter=' ', quotechar='|')
     for row in morse:
