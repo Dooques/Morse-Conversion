@@ -12,9 +12,9 @@ with open('files/morse.csv', newline='') as csv_file:
         entry = ', '.join(row).split(',')
         alphabet.append(entry[0])
         morse_code.append(entry[1])
-print(alphabet)
-print(morse_code)
-morse_alphabet = pd.DataFrame(morse, columns=['alphabet', 'morse'])
+
+morse_alphabet = pd.DataFrame({'alphabet': alphabet, 'morse_code': morse_code})
+print(morse_alphabet)
 
 unconverted = []
 morse_string = []
