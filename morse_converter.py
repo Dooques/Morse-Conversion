@@ -15,11 +15,49 @@ class Morse:
         self.morse_alphabet = pd.DataFrame({'alphabet': self.alphabet, 'morse_code': self.morse_code})
 
     def convert_string(self, to_convert):
-        morse_string = []
-        for char in to_convert:
-            char_cap = char.capitalize()
-            if char_cap in self.morse_alphabet.alphabet.values:
-                char_entry = self.morse_alphabet.loc[self.morse_alphabet.alphabet == char_cap]
-                morse_string.append(char_entry.morse_code.values[0])
-        result = " ".join(morse_string)
+        string_type = self.check_type(to_convert[0])
+        convert_split = to_convert.split(" ")
+        if string_type == "alphabet":
+            result = self.to_morse(convert_split)
+        else:
+            print(convert_split)
+            result = self.from_morse(convert_split)
+        return result
+
+    def check_type(self, item):
+        if item in self.morse_alphabet.morse_code.values:
+            return "morse"
+        else:
+            return "alphabet"
+
+    def to_morse(self, convert_list):
+        morse_list = []
+        word_list = [word + " " for word in convert_list[:-1]]
+        word_list.append(convert_list[-1])
+        for word in word_list:
+            for char in word:
+                char_cap = char.capitalize()
+                if char_cap in self.morse_alphabet.alphabet.values:
+                    char_entry = self.morse_alphabet.loc[self.morse_alphabet.alphabet == char_cap]
+                    morse_list.append(char_entry.morse_code.values[0])
+            if " " in word and word != convert_list[-1:]:
+                morse_list.append("/")
+        result = " ".join(morse_list)
+        return result
+
+    def from_morse(self, convert_list):
+        alphabet_string = []
+        print(convert_list)
+        for character in convert_list:
+            if character == '/':
+                alphabet_string.append(' ')
+            else:
+                print(character)
+                char_entry = self.morse_alphabet.loc[self.morse_alphabet.morse_code == character].values
+                print(char_entry[0][0])
+                alphabet_string.append(char_entry[0][0])
+                print(alphabet_string)
+        print(alphabet_string)
+        result = " ".join(alphabet_string)
+        print(f'Result: {result}')
         return result

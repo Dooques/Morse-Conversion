@@ -51,14 +51,19 @@
       </ul>
     </header>
   </div>
-
 <!--Form-->
 <div class="container">
   <form method="post">
       <label>To Convert </label>
       <div>
-          <textarea class="form-control" placeholder="{{ to_convert }}" id="to_convert" rows="3"
+          {% if placeholder %}
+          <textarea class="form-control" placeholder="{{ placeholder }}" id="placeholder" rows="3"
                     name="to_convert"></textarea>
+          {% endif%}
+          {% if to_convert %}
+          <textarea class="form-control" placeholder="{{ placeholder }}" id="to_convert" rows="3"
+                    name="to_convert">{{ to_convert }}</textarea>
+          {% endif %}
           <div>
               <br>
           <input class="form-control" type="submit" value="Ok">
@@ -66,9 +71,20 @@
           </div>
       </div>
       <div>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+      </div>
+      <br>
+      <div>
           <label>Morse Code</label>
-          <textarea class="form-control" id="textarea-morse" placeholder="{{ converted_string }}" rows="3" disabled
-                    readonly></textarea>
+
+          <textarea class="form-control" id="textarea-morse" rows="3" readonly>{{ converted_string }}</textarea>
+
       </div>
   </form>
 </div>
