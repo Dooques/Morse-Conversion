@@ -20,7 +20,6 @@ class Morse:
         if string_type == "alphabet":
             result = self.to_morse(convert_split)
         else:
-            print(convert_split)
             result = self.from_morse(convert_split)
         return result
 
@@ -47,17 +46,11 @@ class Morse:
 
     def from_morse(self, convert_list):
         alphabet_string = []
-        print(convert_list)
         for character in convert_list:
             if character == '/':
                 alphabet_string.append(' ')
             else:
-                print(character)
                 char_entry = self.morse_alphabet.loc[self.morse_alphabet.morse_code == character].values
-                print(char_entry[0][0])
                 alphabet_string.append(char_entry[0][0])
-                print(alphabet_string)
-        print(alphabet_string)
-        result = " ".join(alphabet_string)
-        print(f'Result: {result}')
+        result = "".join(alphabet_string)
         return result

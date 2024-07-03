@@ -1,60 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Morse Converter</title>
-    <!-- Load Bootstrap-Flask CSS here -->
-    {{ bootstrap.load_css() }}
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='assets/favicon.ico') }}"
-    />
-    <!-- Font Awesome icons (free version)-->
-    <script
-      src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Google fonts-->
-    <link
-      href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link
-      href="{{ url_for('static', filename='css/styles.css') }}"
-      rel="stylesheet"
-    />
-</head>
-<body>
-<!--Header-->
-<div class="container">
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-        <span class="fs-4">Morse Converter</span>
-      </a>
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-      </ul>
-    </header>
-  </div>
+{% include "header.html" %}
 <!--Form-->
 <div class="container">
+    <p>When typing in Morse, please separate the characters by spaces, and spaces between words by a forward slash.</p>
+    <p>"hello there" = .... . .-.. .-.. --- / - .... . .-. .</p>
+</div>
+<div class="container">
   <form method="post">
-      <label>To Convert </label>
+      <label>Text to Convert</label>
       <div>
           {% if placeholder %}
           <textarea class="form-control" placeholder="{{ placeholder }}" id="placeholder" rows="3"
@@ -74,14 +26,14 @@
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       {% for message in messages %}
-      {{ message }}
+      <p style="color: red">{{ message }}</p>
       {% endfor %}
       {% endif %}
       {% endwith %}
       </div>
       <br>
       <div>
-          <label>Morse Code</label>
+          <label>Converted Text</label>
 
           <textarea class="form-control" id="textarea-morse" rows="3" readonly>{{ converted_string }}</textarea>
 
@@ -89,21 +41,6 @@
   </form>
 </div>
 <!--Footer-->
-<div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <div class="col-md-4 d-flex align-items-center">
-      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-      </a>
-      <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Dooques</span>
-    </div>
-    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use
-              xlink:href="x.com/"></use></svg></a></li>
-      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-    </ul>
-  </footer>
-</div>
+
 </body>
 </html>
